@@ -6,14 +6,16 @@ import asyncio
 import psycopg2
 from psycopg2.sql import SQL
 from psycopg2.sql import Identifier
+import config
 
-token = "" #Replace your token
+token = config.GetToken() #Replace your token
 
-dbHost = "" #Change
-db = "" #Change
-dbUser = "" #Change
-dbPassword = "" #Change
-dbPort = "" #Change
+dbConfigs = config.GetDbConfigs()
+dbHost = dbConfigs["host"] #Change
+db = dbConfigs["database"] #Change
+dbUser = dbConfigs["user"] #Change
+dbPassword = dbConfigs["password"] #Change
+dbPort = dbConfigs["port"] #Change
 con = psycopg2.connect(database=db, user=dbUser, password=dbPassword, host=dbHost, port=dbPort)
 con.autocommit = True
 cur = con.cursor()

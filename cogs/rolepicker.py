@@ -11,7 +11,7 @@ class RolePicker(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # We need a database instead of a dictionary here.
+    # We need a database instead of a dictionary here
     messages = defaultdict(dict)
 
     # Command to set an action (role giving) on emoji click on specific message  

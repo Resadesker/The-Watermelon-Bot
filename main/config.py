@@ -2,12 +2,6 @@ configDB = {"host" : "",
             "database" : "",
             "user" : "",
             "password" : "",
-            "port" : ""}
-
+            "port" : "5432"}
 token = ""
-
-def GetToken():
-    return token
-
-def GetDbConfigs():
-    return configDB
+defaultPrefix = ""

@@ -79,11 +79,11 @@ def deleteDbByName(table : str, name : str):
     cur.execute(SQL("DELETE FROM {} WHERE name = %s;").format(Identifier(table)), (name, ))
     con.commit()
 
-def insertDbPrefixes(guildid : str, prefix : str = "bb"):
+def insertDbPrefixes(guildid : str, prefix : str = defaultPrefix):
     cur.execute("INSERT INTO prefixes (guildid, prefix) VALUES (%s, %s);", (guildid, prefix))
     con.commit()
 
-def updateDbPrefixes(guildid : str, prefix : str = "bb"):
+def updateDbPrefixes(guildid : str, prefix : str = defaultPrefix):
     cur.execute("UPDATE prefixes SET prefix = %s WHERE guildid = %s;", (prefix, guildid))
     con.commit()
 
@@ -126,19 +126,14 @@ async def changePrefix(ctx, prefix=None): #changes prefix
             updateDbPrefixes(str(guild.id), defaultPrefix)
             prefix = defaultPrefix
 
-    else:
-        insertDbPrefixes(str(guild.id), defaultPrefix)
-        prefix = defaultPrefix
-        oldPrefix = defaultPrefix
-
-    embed = discord.Embed(
-        colour=embedColor
-    )
-    avatarUrl = GetAvatarLink(str(ctx.author.avatar_url))
-    embed.set_author(name=ctx.author.name,
-                     icon_url=avatarUrl)
-    embed.add_field(name="Prefix Changed", value=f"Prefix has been changed \"{oldPrefix}\" to \"{prefix}\".",
-                    inline=False)
+        embed = discord.Embed(
+            colour=embedColor
+        )
+        avatarUrl = GetAvatarLink(str(ctx.author.avatar_url))
+        embed.set_author(name=ctx.author.name,
+                         icon_url=avatarUrl)
+        embed.add_field(name="Prefix Changed", value=f"Prefix has been changed \"{oldPrefix}\" to \"{prefix}\".",
+                        inline=False)
 
     await ctx.send(embed=embed)
 

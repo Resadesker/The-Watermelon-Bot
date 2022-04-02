@@ -9,14 +9,20 @@ class Errors(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        title = ""
         text = ""
-        if isinstance(error, commands.MissingRequiredArgument):
-            text = 'Please pass in all requirements :rolling_eyes:.'
+        
+        if isinstance(error, commands.BadArgument) or isinstance(error, commands.MissingRequiredArgument):
+            usage = f'{self.client.command_prefix}{ctx.command.name} {ctx.command.signature}'
+            text = f'Correct usage: {usage}'
+            title = "Wrong command usage :no_entry:"
         elif isinstance(error, commands.MissingPermissions):
-            text = "You dont have all the requirements :angry: \n Please make sure the bot's role is higher than the role's"
+            title = "No right to use this command"
+            text = "This command is for a higher role :exclamation:"
         else:
-            text = "An unknown error occured"
-        embed = discord.Embed(title="ERROR", description=error, color=discord.Color.red())
+            text = error
+
+        embed = discord.Embed(title="ERROR: " + title, description=text, color=discord.Color.red())
         print(error)
         await ctx.send(embed=embed)
 

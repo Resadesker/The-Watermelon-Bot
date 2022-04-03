@@ -9,6 +9,7 @@ class Cleaner(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_permissions(administrator=True)
     async def clear(self, ctx, limit : int):
         if limit <= 0: 
             embed = discord.Embed(title="ERROR: limit must be bigger than 0", color=discord.Color.red())

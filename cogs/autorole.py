@@ -7,7 +7,6 @@ from collections import defaultdict
 class Autorole(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.channel = self.client.get_channel(958435074846654466)
 
     # We also need to make db instead of dictionary
     starterRoles = defaultdict(dict)

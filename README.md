@@ -14,4 +14,4 @@ This is a simple Discord bot project created by Resadesker and chivenos
 ###### How to use:
 - Clone the bot
 - Install Discord.py via `pip install discord.py`
-- Run it
+- Run main.py via `python main.py`
